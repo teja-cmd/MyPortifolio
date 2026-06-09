@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23050508'/%3E%3Crect x='1' y='1' width='62' height='62' rx='11' fill='none' stroke='%2300f0ff' stroke-width='2'/%3E%3Ctext x='32' y='44' font-family='Arial Black,sans-serif' font-size='28' font-weight='900' fill='%2300f0ff' text-anchor='middle'%3ETK%3C/text%3E%3C/svg%3E"/>
+<title id="pageTitle">Bathula Teja Kumar | Portfolio</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <div class="loader-logo" id="loaderLogo">TK</div>
+    <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
+    <div class="loader-txt" id="loaderTxt">Initializing...</div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">
+    <span class="lb">&lt;</span><span id="navLogo">TK</span><span class="lb">/&gt;</span>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" class="nav-link act">Home</a></li>
+    <li><a href="#about" class="nav-link">About</a></li>
+    <li><a href="#skills" class="nav-link">Skills</a></li>
+    <li><a href="#projects" class="nav-link">Projects</a></li>
+    <li><a href="#experience" class="nav-link">Experience</a></li>
+    <li><a href="#certifications" class="nav-link">Certifications</a></li>
+    <li><a href="#contact" class="nav-link">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="btn-admin-t" id="adminToggleBtn" title="Admin">&#9881;</button>
+    <a href="TEJAKUMAR.pdf" class="btn-resume" id="resumeLink" download="TEJAKUMAR_Bathula_Resume.pdf">
+      <span>Resume</span>
+      <svg viewBox="0 0 24 24"><path d="M12 16l-6-6h4V4h4v6h4l-6 6zm-6 4h12v-2H6v2z"/></svg>
+    </a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+  <div class="ap-hdr">
+    <span class="ap-title">&#9881; Admin Control Panel</span>
+    <button class="ap-x" id="apClose">&#10005;</button>
+  </div>
+  <div class="ap-tabs" id="apTabs">
+    <button class="ap-tab act" data-tab="identity">Identity</button>
+    <button class="ap-tab" data-tab="projects">Projects</button>
+    <button class="ap-tab" data-tab="experience">Experience</button>
+    <button class="ap-tab" data-tab="certs">Certs</button>
+    <button class="ap-tab" data-tab="skills">Skills</button>
+    <button class="ap-tab" data-tab="settings">Settings</button>
+  </div>
+
+  <!-- IDENTITY TAB -->
+  <div class="ap-cnt act" id="tab-identity">
+    <div class="ap-sec">
+      <div class="ap-sec-ttl">Profile Photo</div>
+      <div class="img-zone" id="imgZone">
+        <input type="file" id="photoInput" accept="image/*"/>
+        <img class="iz-preview" id="izPreview" src="" alt=""/>
+        <div class="iz-icon" id="izIcon">&#128247;</div>
+        <div class="iz-txt" id="izTxt">Click or drag to upload your photo</div>
+      </div>
+      <button class="ap-btn" id="savePhotoBtn" style="margin-top:.7rem">Update Photo</button>
+    </div>
+
+    <div class="ap-sec">
+      <div class="ap-sec-ttl">&#128196; Resume / CV — Google Drive Link</div>
+      <div class="af">
+        <label>Paste your Google Drive link</label>
+        <input type="url" id="resumeDriveLink" placeholder="https://drive.google.com/file/d/.../view"/>
+      </div>
+      <p style="font-family:var(--fm);font-size:.65rem;color:var(--tx3);margin-top:.4rem;line-height:1.6">
+        &#128161; Drive → Right-click file → Share → Anyone with the link → Copy → Paste above
+      </p>
+      <div id="resumeLinkStatus" style="font-family:var(--fm);font-size:.68rem;color:var(--cy);margin-top:.4rem;display:none">
+        &#10003; Drive link is active
+      </div>
+      <button class="ap-btn" id="saveResumeBtn" style="margin-top:.7rem">
+        Save Resume Link
+      </button>
+    </div>
+
+
+
+    <div class="ap-sec">
+      <div class="ap-sec-ttl">Personal Info</div>
+      <div class="af"><label>First Name</label><input id="ap-fn" placeholder="Bathula"/></div>
+      <div class="af"><label>Last Name / Accent</label><input id="ap-ln" placeholder="Teja Kumar"/></div>
+      <div class="af"><label>Hero Description</label><textarea id="ap-desc" rows="3"></textarea></div>
+      <div class="af"><label>Email</label><input type="email" id="ap-email" placeholder="you@email.com"/></div>
+      <div class="af"><label>GitHub URL</label><input type="url" id="ap-github"/></div>
+      <div class="af"><label>LinkedIn URL</label><input type="url" id="ap-linkedin"/></div>
+      <div class="af"><label>Location</label><input id="ap-location"/></div>
+      <div class="af"><label>Resume URL / filename</label><input id="ap-resume"/></div>
+      <button class="ap-btn" onclick="saveIdentity()">Save Identity</button>
+    </div>
+    <div class="ap-sec">
+      <div class="ap-sec-ttl">About Me Content</div>
+      <div class="af"><label>Paragraph 1</label><textarea id="ap-p1" rows="3"></textarea></div>
+      <div class="af"><label>Paragraph 2</label><textarea id="ap-p2" rows="3"></textarea></div>
+      <div class="af"><label>Paragraph 3</label><textarea id="ap-p3" rows="3"></textarea></div>
+      <div class="af"><label>Highlights (emoji|text, one per line)</label><textarea id="ap-hl" rows="5" placeholder="&#127891;|B.Tech CSE..."></textarea></div>
+      <button class="ap-btn" onclick="saveAbout()">Save About</button>
+    </div>
+    <div class="ap-sec">
+      <div class="ap-sec-ttl">Stats Cards</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
+        <div class="af"><label>Stat 1 Value</label><input id="s1v" placeholder="9.26"/></div>
+        <div class="af"><label>Stat 1 Label</label><input id="s1l" placeholder="CGPA"/></div>
+        <div class="af"><label>Stat 2 Value</label><input id="s2v" placeholder="#1"/></div>
+        <div class="af"><label>Stat 2 Label</label><input id="s2l" placeholder="IBM Z Global"/></div>
+        <div class="af"><label>Stat 3 Value</label><input id="s3v" placeholder="10"/></div>
+        <div class="af"><label>Stat 3 Label</label><input id="s3l" placeholder="GitHub Repos"/></div>
+      </div>
+      <button class="ap-btn" onclick="saveStats()">Save Stats</button>
+    </div>
+    <div class="ap-sec">
+      <div class="ap-sec-ttl">Typing Phrases</div>
+      <div class="af"><label>One phrase per line</label><textarea id="ap-phrases" rows="6"></textarea></div>
+      <button class="ap-btn" onclick="savePhrases()">Save Phrases</button>
+    </div>
+  </div>
+
+  <!-- PROJECTS TAB -->
+  <div class="ap-cnt" id="tab-projects">
+    <button class="ap-btn" onclick="openProjModal(null)" style="margin-bottom:1rem;width:100%">+ Add New Project</button>
+    <div class="ap-sec-ttl" style="margin-bottom:.6rem">&#8597; Drag to reorder</div>
+    <div class="drag-list" id="projDragList"></div>
+  </div>
+
+  <!-- EXPERIENCE TAB -->
+  <div class="ap-cnt" id="tab-experience">
+    <button class="ap-btn" onclick="openExpModal(null)" style="margin-bottom:1rem;width:100%">+ Add New Experience</button>
+    <div class="ap-sec-ttl" style="margin-bottom:.6rem">&#8597; Drag to reorder</div>
+    <div class="drag-list" id="expDragList"></div>
+  </div>
+
+
+  <!-- CERTS TAB -->
+  <div class="ap-cnt" id="tab-certs">
+    <button class="ap-btn" onclick="openCertModal(null)" style="width:100%;margin-bottom:1rem">+ Add Certificate</button>
+    <div class="ap-sec-ttl" style="margin-bottom:.5rem">&#8597; Drag to reorder</div>
+    <div class="drag-list" id="certDragList"></div>
+  </div>
+
+  <!-- SKILLS TAB -->
+  <div class="ap-cnt" id="tab-skills">
+    <div class="ap-sec">
+      <div class="ap-sec-ttl">Tech Tags</div>
+      <div class="af"><label>Tags (comma separated)</label><textarea id="ap-tags" rows="4"></textarea></div>
+      <button class="ap-btn" onclick="saveTags()">Save Tags</button>
+    </div>
+    <div class="ap-sec">
+      <div class="ap-sec-ttl">Skill Categories</div>
+      <div id="skillCatEd"></div>
+      <button class="ap-btn" onclick="addSkillCat()" style="background:linear-gradient(135deg,var(--orange),#c03300)">+ Add Category</button>
+    </div>
+  </div>
+
+  <!-- SETTINGS TAB -->
+  <div class="ap-cnt" id="tab-settings">
+    <div class="ap-sec">
+      <div class="ap-sec-ttl">Hero Badge</div>
+      <div class="af"><label>Badge Title</label><input id="ap-bt"/></div>
+      <div class="af"><label>Badge Subtitle</label><input id="ap-bs"/></div>
+      <button class="ap-btn" onclick="saveBadge()">Save Badge</button>
+    </div>
+    <div class="ap-sec">
+      <div class="ap-sec-ttl">Footer</div>
+      <div class="af"><label>Footer Text</label><input id="ap-ft"/></div>
+      <button class="ap-btn" onclick="saveFooter()">Save Footer</button>
+    </div>
+    <div class="ap-sec">
+      <div class="ap-sec-ttl" style="color:#ff4444">Danger Zone</div>
+      <button class="ap-btn" style="background:linear-gradient(135deg,#ff4444,#aa0000)" onclick="resetAll()">&#9888; Reset All to Defaults</button>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <canvas id="particleCanvas"></canvas>
+  <div class="hero-grid-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag" data-reveal>// 01. Hello World</div>
+    <h1 class="hero-name" data-reveal>
+      <span class="name-line" id="heroFN">Bathula</span>
+      <span class="name-line accent-glow" id="heroLN">Teja Kumar</span>
+    </h1>
+    <div class="hero-roles" data-reveal>
+      <span class="st">I build </span>
+      <span class="tt" id="typingEl"></span>
+      <span class="tc">|</span>
+    </div>
+    <p class="hero-desc" data-reveal id="heroDesc">
+      Final year <strong>B.Tech CSE (AIML)</strong> student @ Mohan Babu University &bull;
+      <strong>IBM Z Datathon 2025 Global 1st Place Winner</strong> &bull;
+      UI/UX Designer Intern @ AatonovaZ Technologies
+    </p>
+    <div class="hero-btns" data-reveal>
+      <a href="#projects" class="btn-primary"><span>View Projects</span><div class="btn-glow"></div></a>
+      <a href="#contact" class="btn-outline">Let's Talk</a>
+    </div>
+    <div class="hero-socials" data-reveal>
+      <a href="https://linkedin.com/in/teja-kumar-bathula/" target="_blank" class="soc-link" id="soLI">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zm2-3a2 2 0 110-4 2 2 0 010 4z"/></svg>
+      </a>
+      <a href="https://github.com/teja-cmd" target="_blank" class="soc-link" id="soGH">
+        <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+      </a>
+      <a href="mailto:tejakumarbathula5@gmail.com" class="soc-link" id="soEM">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- HEX PHOTO FRAME -->
+  <div class="hero-photo" id="heroPhotoWrap" data-reveal>
+    <div class="hex-wrap">
+      <div class="hex-ring hex-ring-border"></div>
+      <div class="hex-photo-inner" id="heroHexInner">
+        <div class="hex-placeholder" id="heroPlaceholder">
+          <span id="heroInitials">TK</span>
+          <small>Upload photo via admin</small>
+        </div>
+      </div>
+      <div class="hex-scan"></div>
+      <div class="hex-orb o1"></div>
+      <div class="hex-orb o2"></div>
+      <div class="hex-orb o3"></div>
+      <div class="hex-corner hc-tl"></div>
+      <div class="hex-corner hc-br"></div>
+    </div>
+    <div class="hero-badge">
+      <div class="hb-icon">&#127942;</div>
+      <div>
+        <div class="hb-title" id="badgeTitle">IBM Z Datathon 2025</div>
+        <div class="hb-sub" id="badgeSub">Global #1 &bull; 6,500+ Participants &bull; 44 Countries</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-ind"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="sec-hdr" data-reveal>
+      <span class="sec-tag">// 02. About</span>
+      <h2 class="sec-title">Who Am I?</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-left" data-reveal>
+        <div class="about-hex-wrap">
+          <div class="about-hex-ring r1"></div>
+          <div class="about-hex-ring r2"></div>
+          <div class="hex-ring about-hex-border"></div>
+          <div class="about-hex-inner" id="aboutHexInner">
+            <div class="hex-placeholder" id="aboutPlaceholder">TK</div>
+          </div>
+          <div class="hex-scan"></div>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card" data-tilt><span class="stat-v" id="s1Val">9.26</span><span class="stat-l" id="s1Lbl">CGPA</span></div>
+          <div class="stat-card" data-tilt><span class="stat-v" id="s2Val">#1</span><span class="stat-l" id="s2Lbl">IBM Z Global</span></div>
+          <div class="stat-card" data-tilt><span class="stat-v" id="s3Val">10</span><span class="stat-l" id="s3Lbl">GitHub Repos</span></div>
+        </div>
+      </div>
+      <div class="about-right" data-reveal>
+        <p class="about-intro" id="aP1">Hey! I'm <strong>Teja Kumar Bathula</strong>, a final year B.Tech student specializing in <strong>Computer Science &amp; Engineering (AIML)</strong> at Mohan Babu University, Tirupati.</p>
+        <p id="aP2">Passionate about building things that matter — from AI models detecting plastic pollution to productivity platforms. Currently a <strong>UI/UX Designer Intern</strong> at AatonovaZ Technologies.</p>
+        <p id="aP3">As <strong>ISTE Student Coordinator</strong>, I've organized workshops and hackathons for 100+ participants while mentoring juniors on technical growth.</p>
+        <div class="highlights" id="highlights">
+          <div class="hl"><span>&#127891;</span><span>B.Tech CSE (AIML) — Mohan Babu University</span></div>
+          <div class="hl"><span>&#128205;</span><span>Kanigiri, Andhra Pradesh, India</span></div>
+          <div class="hl"><span>&#128188;</span><span>UI/UX Designer Intern @ AatonovaZ Technologies</span></div>
+          <div class="hl"><span>&#127942;</span><span>IBM Z Datathon 2025 — Global 1st Place Winner</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section section-alt" id="skills">
+  <div class="container">
+    <div class="sec-hdr" data-reveal><span class="sec-tag">// 03. Skills</span><h2 class="sec-title">Tech Arsenal</h2></div>
+    <div class="skills-grid" id="skillsGrid" data-reveal></div>
+    <div class="tech-tags" id="techTags" data-reveal></div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="container">
+    <div class="sec-hdr" data-reveal><span class="sec-tag">// 04. Projects</span><h2 class="sec-title">What I've Built</h2></div>
+    <div class="filter-bar" id="filterBar" data-reveal></div>
+    <div class="projects-grid" id="projectsGrid"></div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section section-alt" id="experience">
+  <div class="container">
+    <div class="sec-hdr" data-reveal><span class="sec-tag">// 05. Experience</span><h2 class="sec-title">My Journey</h2></div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+
+<!-- CERTIFICATIONS -->
+<section class="section" id="certifications">
+  <div class="container">
+    <div class="sec-hdr" data-reveal>
+      <span class="sec-tag">// 06. Certifications</span>
+      <h2 class="sec-title">My Certifications</h2>
+    </div>
+    <div class="cert-grid" id="certGrid"></div>
+    <div id="certEmpty" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;padding:4rem 2rem;text-align:center;border:1px dashed rgba(0,240,255,.26);border-radius:20px;color:#4a5568;">
+      <div style="font-size:3rem;opacity:.4">&#127942;</div>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.05em">No certifications yet. Login as admin to add certificates.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="sec-hdr" data-reveal><span class="sec-tag">// 07. Contact</span><h2 class="sec-title">Let's Connect</h2></div>
+    <div class="contact-grid">
+      <div class="contact-left" data-reveal>
+        <p class="c-intro">Have a project, opportunity, or just want to chat? My inbox is always open.</p>
+        <div class="c-cards">
+          <a href="#" class="c-card" id="cEmail" data-tilt><span class="cc-ico">&#9993;</span><div><div class="cc-lbl">Email</div><div class="cc-val" id="cEmailVal">tejakumarbathula5@gmail.com</div></div></a>
+          <a href="https://linkedin.com/in/teja-kumar-bathula/" target="_blank" class="c-card" id="cLI" data-tilt><span class="cc-ico">in</span><div><div class="cc-lbl">LinkedIn</div><div class="cc-val">teja-kumar-bathula</div></div></a>
+          <a href="https://github.com/teja-cmd" target="_blank" class="c-card" id="cGH" data-tilt><span class="cc-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></span><div><div class="cc-lbl">GitHub</div><div class="cc-val">teja-cmd</div></div></a>
+          <div class="c-card" data-tilt><span class="cc-ico">&#128205;</span><div><div class="cc-lbl">Location</div><div class="cc-val" id="cLoc">Andhra Pradesh, India</div></div></div>
+        </div>
+      </div>
+      <!-- EmailJS setup: see script.js EMAILJS_CONFIG -->
+        <form class="contact-form" id="contactForm" data-reveal>
+        <div class="fg"><label>Name</label><input id="cf-n" placeholder="Your Name"/><span class="fe" id="en"></span></div>
+        <div class="fg"><label>Email</label><input type="email" id="cf-e" placeholder="your@email.com"/><span class="fe" id="ee"></span></div>
+        <div class="fg"><label>Subject</label><input id="cf-s" placeholder="Project Collaboration..."/></div>
+        <div class="fg"><label>Message</label><textarea id="cf-m" rows="5" placeholder="Tell me about your project..."></textarea><span class="fe" id="em"></span></div>
+        <button type="submit" class="btn-primary btn-full"><span id="cfTxt">Send Message</span><div class="btn-glow"></div></button>
+        <div class="form-ok" id="formOk">&#10003; Message sent! I'll get back to you soon at <strong id="formOkEmail"></strong></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo"><span class="lb">&lt;</span>TK<span class="lb">/&gt;</span></div>
+    <p class="footer-txt" id="footerTxt">Crafted with &#10084; by Bathula Teja Kumar &bull; 2025</p>
+    <div class="footer-links">
+      <a href="https://github.com/teja-cmd" target="_blank" id="ftGH">GitHub</a>
+      <a href="https://linkedin.com/in/teja-kumar-bathula/" target="_blank" id="ftLI">LinkedIn</a>
+      <a href="mailto:tejakumarbathula5@gmail.com" id="ftEM">Email</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="modal-ov" id="adminModal">
+  <div class="modal-box msm">
+    <button class="modal-x" id="closeAdminModal">&#10005;</button>
+    <div class="modal-ico">&#128274;</div>
+    <h3 class="modal-title">Admin Access</h3>
+    <p class="modal-sub">Enter your password to unlock the Admin Control Panel.</p>
+    <div class="fg"><label>Password</label><input type="password" id="adminPw" placeholder="Enter password"/><span class="fe" id="adminErr"></span></div>
+    <button class="btn-primary btn-full" id="adminLoginBtn"><span>Authenticate</span><div class="btn-glow"></div></button>
+  </div>
+</div>
+
+<!-- PROJECT MODAL -->
+<div class="modal-ov" id="projModal">
+  <div class="modal-box mlg">
+    <button class="modal-x" id="closeProjModal">&#10005;</button>
+    <h3 class="modal-title" id="pmTitle">Add Project</h3>
+    <input type="hidden" id="pm-id"/>
+    <div class="modal-grid">
+      <div class="fg"><label>Title *</label><input id="pm-title" placeholder="Project name"/></div>
+      <div class="fg"><label>Category</label>
+        <select id="pm-cat"><option value="all">General</option><option value="python">Python</option><option value="javascript">JavaScript</option><option value="react">React</option><option value="ml">ML / AI</option></select>
+      </div>
+      <div class="fg fw"><label>Description *</label><textarea id="pm-desc" rows="3"></textarea></div>
+      <div class="fg"><label>Technologies (comma separated)</label><input id="pm-tech" placeholder="React, Python..."/></div>
+      <div class="fg"><label>Project Link</label><input type="url" id="pm-link" placeholder="https://github.com/..."/></div>
+      <div class="fg"><label>Date</label><input id="pm-date" placeholder="Jan 2025"/></div>
+      <div class="fg"><label>Emoji Icon</label><input id="pm-icon" placeholder="🚀" maxlength="4"/></div>
+    </div>
+    <button class="btn-primary btn-full" id="saveProjBtn"><span>Save Project</span><div class="btn-glow"></div></button>
+  </div>
+</div>
+
+<!-- EXPERIENCE MODAL -->
+<div class="modal-ov" id="expModal">
+  <div class="modal-box mlg">
+    <button class="modal-x" id="closeExpModal">&#10005;</button>
+    <h3 class="modal-title" id="emTitle">Add Experience</h3>
+    <input type="hidden" id="em-id"/>
+    <div class="modal-grid">
+      <div class="fg"><label>Role / Title *</label><input id="em-role" placeholder="Software Engineer Intern"/></div>
+      <div class="fg"><label>Organization *</label><input id="em-org" placeholder="Company / University"/></div>
+      <div class="fg"><label>Date Range *</label><input id="em-date" placeholder="Jan 2025 – Present"/></div>
+      <div class="fg"><label>Type</label>
+        <select id="em-type"><option value="work">Work</option><option value="education">Education</option><option value="achievement">Achievement</option><option value="volunteer">Volunteer</option></select>
+      </div>
+      <div class="fg fw"><label>Description *</label><textarea id="em-desc" rows="4"></textarea></div>
+      <div class="fg fw"><label>Tags (comma separated)</label><input id="em-tags" placeholder="React, Python, Leadership..."/></div>
+    </div>
+    <button class="btn-primary btn-full" id="saveExpBtn"><span>Save Experience</span><div class="btn-glow"></div></button>
+  </div>
+</div>
+
+<!-- CERT MODAL -->
+<div class="modal-ov" id="certModal">
+  <div class="modal-box mlg">
+    <button class="modal-x" id="closeCertModal">&#10005;</button>
+    <h3 class="modal-title" id="cmTitle">Add Certificate</h3>
+    <input type="hidden" id="cm-id"/>
+    <div class="modal-grid">
+
+      <!-- Basic info -->
+      <div class="fg fw"><label>Certificate Title *</label><input id="cm-title" placeholder="e.g. Python for Data Science — IBM"/></div>
+      <div class="fg"><label>Issuing Organization *</label><input id="cm-org" placeholder="e.g. IBM, Google, Coursera"/></div>
+      <div class="fg"><label>Issue Date</label><input id="cm-date" placeholder="Mar 2025"/></div>
+      <div class="fg"><label>Credential ID (optional)</label><input id="cm-cred" placeholder="ABC123XYZ"/></div>
+      <div class="fg fw"><label>Description (optional)</label><textarea id="cm-desc" rows="2" placeholder="What you learned or achieved..."></textarea></div>
+      <div class="fg"><label>Category</label>
+        <select id="cm-cat"><option value="general">General</option><option value="ai">AI / ML</option><option value="web">Web Dev</option><option value="cloud">Cloud</option><option value="data">Data Science</option><option value="lang">Programming</option><option value="design">Design</option></select>
+      </div>
+      <div class="fg"><label>Badge Emoji (fallback if no logo)</label><input id="cm-icon" placeholder="&#127942;" maxlength="4" value="&#127942;"/></div>
+
+      <!-- SECTION 1: Company Logo -->
+      <div class="fg fw cm-divider">
+        <div class="cm-sec-title">&#127981; Company Logo <span class="cm-sec-sub">(shown on top half of card)</span></div>
+      </div>
+      <div class="fg fw">
+        <label>Upload Company Logo (PNG/JPG, max 2MB — use transparent or white background)</label>
+        <div class="img-zone" id="cmLogoZone">
+          <input type="file" id="cm-logo-file" accept="image/*"/>
+          <div class="iz-icon" id="cmLogoIcon">&#127981;</div>
+          <div class="iz-txt" id="cmLogoTxt">Click or drag to upload logo</div>
+        </div>
+        <img id="cmLogoPreview" src="" alt="" style="display:none;max-height:80px;max-width:160px;object-fit:contain;margin-top:.6rem;border-radius:8px;border:1px solid var(--bd);background:var(--bg3);padding:.5rem"/>
+      </div>
+
+      <!-- SECTION 2: Actual Certificate -->
+      <div class="fg fw cm-divider">
+        <div class="cm-sec-title">&#128196; Certificate / Badge <span class="cm-sec-sub">(opens when "View Certificate" is clicked)</span></div>
+      </div>
+      <div class="fg fw">
+        <div class="cm-src-tabs">
+          <button type="button" class="cm-src-btn act" id="csBtnLink" onclick="cmSwitchSrc('link')">&#128279; Paste Link</button>
+          <button type="button" class="cm-src-btn" id="csBtnFile" onclick="cmSwitchSrc('file')">&#128247; Upload Certificate Image</button>
+        </div>
+      </div>
+      <div class="fg fw" id="csLinkBox">
+        <label>Certificate / Badge URL</label>
+        <input type="url" id="cm-link" placeholder="https://drive.google.com/... or https://credly.com/..."/>
+        <p style="font-family:var(--fm);font-size:.63rem;color:var(--tx3);margin-top:.3rem">
+          &#128161; Google Drive: Share → Anyone with the link → Copy link → Paste here
+        </p>
+      </div>
+      <div class="fg fw" id="csFileBox" style="display:none">
+        <label>Upload Certificate — Image or PDF (JPG/PNG/PDF, max 4MB)</label>
+        <div class="img-zone" id="cmCertZone">
+          <input type="file" id="cm-cert-file" accept="image/jpeg,image/png,image/gif,image/webp,application/pdf"/>
+          <div class="iz-icon" id="cmCertIcon">&#128196;</div>
+          <div class="iz-txt" id="cmCertTxt">Click or drag to upload certificate</div>
+        </div>
+        <img id="cmCertPreview" src="" alt="" style="display:none;width:100%;max-height:130px;object-fit:contain;margin-top:.6rem;border-radius:8px;border:1px solid var(--bd);background:var(--bg3);padding:.5rem"/>
+      </div>
+
+    </div>
+    <button class="btn-primary btn-full" id="saveCertBtn"><span>Save Certificate</span><div class="btn-glow"></div></button>
+  </div>
+</div>
+
+<!-- CERT LIGHTBOX MODAL -->
+<div class="modal-ov" id="certLightbox">
+  <div class="cert-lb-box">
+    <div class="cert-lb-header">
+      <span class="cert-lb-title" id="certLbTitle">Certificate</span>
+      <div style="display:flex;align-items:center;gap:.6rem">
+        <a class="cert-lb-dl" id="certLbDl" href="#" download>&#11123; Download</a>
+        <button class="modal-x" id="closeCertLb">&#10005;</button>
+      </div>
+    </div>
+    <div class="cert-lb-body" id="certLbBody">
+      <!-- filled dynamically: <img> for images, <iframe> for PDFs -->
+    </div>
+  </div>
+</div>
+
+<!-- DELETE CONFIRM -->
+<div class="modal-ov" id="delModal">
+  <div class="modal-box msm">
+    <div class="modal-ico" style="color:#ff4444">&#9888;</div>
+    <h3 class="modal-title">Confirm Delete</h3>
+    <p class="modal-sub">This action cannot be undone.</p>
+    <div class="modal-acts">
+      <button class="btn-outline" id="cancelDel">Cancel</button>
+      <button class="btn-danger" id="confirmDel">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
